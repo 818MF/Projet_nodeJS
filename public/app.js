@@ -261,6 +261,7 @@ function displayFavorites(favorites) {
                     <h3 class="movie-card-title">${movie.title}</h3>
                     <p class="movie-card-year">${movie.releaseYear}</p>
                     <p>Rating: ${movie.rating || 'Not rated'}</p>
+                    <p>Notes: ${movie.personalNote || 'No notes'}</p>
                 </div>
             </div>
             <button class="delete-btn" onclick="event.stopPropagation(); removeFavorite('${movie._id}')">Delete</button>
@@ -276,7 +277,7 @@ function showMovieDetails(movie, isFavorite = false) {
     modalYear.textContent = movie.releaseYear || new Date(movie.release_date).getFullYear();
     modalDescription.textContent = movie.description || movie.overview;
     movieRating.value = movie.rating || '5';
-    movieNotes.value = movie.notes || '';
+    movieNotes.value = movie.personalNote || '';
     
     saveToFavorites.onclick = () => {
         const movieData = {
@@ -286,11 +287,11 @@ function showMovieDetails(movie, isFavorite = false) {
             description: movie.overview || movie.description,
             releaseYear: movie.releaseYear || new Date(movie.release_date).getFullYear(),
             rating: parseInt(movieRating.value),
-            notes: movieNotes.value
+            personalNote: movieNotes.value
         };
         
         if (isFavorite) {
-            updateFavorite(movie._id, { rating: movieData.rating, notes: movieData.notes });
+            updateFavorite(movie._id, { rating: movieData.rating, personalNote: movieData.personalNote });
         } else {
             addToFavorites(movieData);
         }

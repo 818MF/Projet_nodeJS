@@ -31,9 +31,17 @@ router.get("/search", auth, async (req, res) => {
 });
 
 // Add movie to favorites
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, [
+	body("personalNote").optional().isString(),
+	body("rating").optional().isFloat({ min: 0, max: 10 })
+], async (req, res) => {
 	try {
-		const { tmdbId } = req.body;
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+
+		const { tmdbId, personalNote, rating } = req.body;
 
 		// Check if movie already exists in favorites
 		const existingMovie = await Movie.findOne({ user: req.user._id, tmdbId });
@@ -48,6 +56,8 @@ router.post("/", auth, async (req, res) => {
 		const movie = new Movie({
 			...movieDetails,
 			user: req.user._id,
+			personalNote: personalNote || "",
+			rating: rating || 0
 		});
 
 		await movie.save();
