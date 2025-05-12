@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Movie Manager</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link active" data-page="search">Search Movies</a>
+            <a href="#" class="nav-link" data-page="favorites">My Favorites</a>
+            <a href="#" class="nav-link" id="logoutBtn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Auth Forms -->
+        <div class="page" id="authPage">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-form="login">Login</button>
+                    <button class="auth-tab" data-form="register">Register</button>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+
+                <form id="registerForm" class="auth-form hidden">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search Page -->
+        <div class="page hidden" id="searchPage">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for movies...">
+                <button id="searchBtn">Search</button>
+            </div>
+            <div class="movies-grid" id="searchResults"></div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div class="page hidden" id="favoritesPage">
+            <h2>My Favorite Movies</h2>
+            <div class="movies-grid" id="favoritesList"></div>
+        </div>
+    </main>
+
+    <!-- Movie Details Modal -->
+    <div class="modal hidden" id="movieModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="movie-details">
+                <img src="" alt="Movie Poster" id="modalPoster">
+                <div class="movie-info">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalYear"></p>
+                    <p id="modalDescription"></p>
+                    <div class="rating-container">
+                        <label>Rating:</label>
+                        <select id="movieRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="notes-container">
+                        <label>Notes:</label>
+                        <textarea id="movieNotes"></textarea>
+                    </div>
+                    <button id="saveToFavorites">Save to Favorites</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

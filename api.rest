@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:3000/api
+@authToken = your_auth_token_here
+
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Logout
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{authToken}}
+
+### Search movies
+GET {{baseUrl}}/movies/search?query=inception
+Authorization: Bearer {{authToken}}
+
+### Get all favorite movies
+GET {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
+
+### Add movie to favorites
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "tmdbId": 27205
+}
+
+### Update movie note and rating
+PUT {{baseUrl}}/movies/movie_id_here
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "personalNote": "Great movie!",
+    "rating": 9
+}
+
+### Delete movie from favorites
+DELETE {{baseUrl}}/movies/movie_id_here
+Authorization: Bearer {{authToken}} 
